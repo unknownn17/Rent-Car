@@ -1,0 +1,45 @@
+syntax="proto3";
+
+option go_package="./car";
+
+
+message CreateCarReq{
+    string car_model=1;
+    string car_name=2;
+    int32 car_year=3;
+    float price=4;
+    string condition=5;
+    int32 available_car=6;
+    int32 car_number=7;
+    float penaltiy=8;
+}
+
+message CreateCarResponse{
+    int32 car_id=1;
+    string car_model=2;
+    string car_name=3;
+    int32 car_year=4;
+    float price=5;
+    string condition=6;
+    int32 available_car=7;
+    int32 car_number=8;
+    float penaltiy=9;
+
+}
+
+message EmptyReq{}
+
+message GetCarReq {
+    int32 car_id=1;
+}
+
+message DeleteResp{
+    string message=1;
+}
+
+service CarService {
+    rpc CreateCar(CreateCarReq) returns(CreateCarResponse);
+    rpc GetCars(EmptyReq) returns(stream CreateCarResponse);
+    rpc GetCar(GetCarReq) returns(CreateCarResponse);
+    rpc RemoveCar(GetCarReq) returns(DeleteResp);
+}
