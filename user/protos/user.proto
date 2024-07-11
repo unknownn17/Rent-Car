@@ -1,0 +1,106 @@
+syntax="proto3";
+
+option go_package="/user";
+
+import "google/protobuf/timestamp.proto";
+
+message RegisterRequest{
+    string name=1;
+    int32 age=2;
+    string email=3;
+    string password=4;
+    string phone_number=5;
+}
+
+message RegisterResponse{
+    string message=1;
+}
+
+message VerifyRequest{
+    string email=1;
+    string code=2;
+}
+
+message VerifyResponse{
+    string token=1;
+}
+
+message LogInRequest{
+    string email=1;
+    string password=2;
+}
+
+message LogOutRequest{
+    string email=1;
+    string password=2;
+}
+
+message LogOutResponse{
+    string message=1;
+}
+
+message RemoveAccountRequest{
+    string email=1;
+    string password=2;
+}
+
+message RemoveAccountResponse{
+    string message=1;
+}
+
+message UpdateRequest{
+    string name=1;
+    int32 age=2;
+    string email=3;
+    string password=4;
+    string phone_number=5;
+    int32 id=6;
+}
+
+message GeneralUserResponse{
+    int32 id=1;
+    string name=2;
+    int32 age=3;
+    string email=4;
+    string password=5;
+    string phone_number=6;
+    bool blocked=7;
+    google.protobuf.Timestamp picked_up=8;
+    google.protobuf.Timestamp returning_day=9;
+}
+
+message GetInfoRequest{
+    int32 id=1;
+}
+
+message GetAllUsersRequest{}
+
+message GetAllUsersResponse{
+    repeated GeneralUserResponse users=1;
+}
+
+message SearchUserRequest{
+    string name=1;
+}
+
+message BlockuserRequest{
+    int32 id=1;
+}
+
+message BlockuserResponse{
+    string status=1;
+}
+
+
+service UserService{
+    rpc Register(RegisterRequest) returns(RegisterResponse);
+    rpc Verify(VerifyRequest) returns (VerifyResponse);
+    rpc LogOut(LogOutRequest) returns (LogOutResponse);
+    rpc Login(LogInRequest) returns (VerifyResponse);
+    rpc Delete(RemoveAccountRequest) returns (RemoveAccountResponse);
+    rpc GetUser(GetInfoRequest) returns (GeneralUserResponse);
+    rpc UpdateUser(UpdateRequest) returns(GeneralUserResponse);
+    rpc GetAllUsers(GetAllUsersRequest) returns(stream GeneralUserResponse);
+    rpc BlockUser(BlockuserRequest) returns (BlockuserResponse);
+
+}

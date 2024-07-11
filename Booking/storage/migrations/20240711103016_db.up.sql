@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS book{
+    id SERIAL PRIMARY KEY
+    car_id INT,
+    user_id INT,
+    book_at TIMESTAMPTZ,
+    pick_up TIMESTAMPTZ,
+    returning_day TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+}
