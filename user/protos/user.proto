@@ -10,6 +10,7 @@ message RegisterRequest{
     string email=3;
     string password=4;
     string phone_number=5;
+    bool driver_lisence=6;
 }
 
 message RegisterResponse{
