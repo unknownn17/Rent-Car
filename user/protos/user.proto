@@ -103,5 +103,4 @@ service UserService{
     rpc UpdateUser(UpdateRequest) returns(GeneralUserResponse);
     rpc GetAllUsers(GetAllUsersRequest) returns(stream GeneralUserResponse);
     rpc BlockUser(BlockuserRequest) returns (BlockuserResponse);
-
 }
